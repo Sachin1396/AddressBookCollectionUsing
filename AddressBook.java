@@ -1,10 +1,13 @@
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class AddressBook {
-    Contacts contacts = new Contacts();
+    Contacts contacts;
     Scanner scanner = new Scanner(System.in);
+    ArrayList<Contacts> arrayList = new ArrayList<Contacts>();
     public void addContact(){
        // Scanner scanner = new Scanner(System.in);
+        contacts = new Contacts();
         System.out.println("Enter the first name");
         contacts.setFirstName(scanner.nextLine());
         System.out.println("enter the last name");
@@ -19,7 +22,15 @@ public class AddressBook {
         contacts.setEmail(scanner.nextLine());
         System.out.println("enter the phone number");
         contacts.setPhoneNumber(scanner.nextLine());
-        System.out.println(contacts);
+        //System.out.println(contacts);
+        arrayList.add(contacts);
+        //System.out.println(contacts);
+    }
+    public void displayContact()
+    {
+        for(int i=0;i<arrayList.size();i++){
+            System.out.println(arrayList.get(i)+"");
+        }
     }
     //editing contact based on person name
     public void editContact() {
