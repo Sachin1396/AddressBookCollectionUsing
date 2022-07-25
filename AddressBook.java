@@ -90,6 +90,16 @@ public class AddressBook {
             }
         }
     }
+    public void searchPersonCity() {
+        System.out.println("Enter City name");
+        String city = scanner.next();
+        list.stream().filter(person -> person.getCity().equalsIgnoreCase(city)).forEach(System.out::println);
+    }
+    public void searchPersonState() {
+        System.out.println("Enter State name");
+        String state = scanner.next();
+        list.stream().filter(person -> person.getState().equalsIgnoreCase(state)).forEach(System.out::println);
+    }
         //Deleting the contact based on firstName
         public void deleteContact() {
             System.out.println("Enter the first name");

@@ -42,6 +42,12 @@ public class AddressBookMain {
                     addressBook.displayContact();
                     System.exit(3);
                     break;
+                case 5:
+                    addressBook.searchPersonCity();
+                    break;
+                case 6:
+                    addressBook.searchPersonState();
+                    break;
                 default:
                     System.out.println("Please enter the correct choice");
 
