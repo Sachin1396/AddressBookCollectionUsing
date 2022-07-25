@@ -3,21 +3,6 @@ import java.util.Scanner;
 
 public class AddressBookMain {
 
-
-       //static HashMap<String, AddressBook> addressBookMap = new HashMap<>();
-       /* public static void addNewAddressBook(){
-            Scanner scanner = new Scanner(System.in);
-            System.out.println("enter the address book name");
-            String addressBookName = scanner.nextLine();
-            if(addressBookMap.containsKey(addressBookName)){
-                System.out.println("address book is already available");
-            }
-            else{
-                AddressBook addressBook =new AddressBook();
-                //addressBookMap.put(addressBookName,addressBook);
-            }
-
-        }*/
     public static  void main(String[] args) {
         System.out.println("Welcome to a address book program");
         AddressBook addressBook = new AddressBook();

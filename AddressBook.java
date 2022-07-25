@@ -1,6 +1,4 @@
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Scanner;
+import java.util.*;
 
 public class AddressBook {
     Contacts contacts;
@@ -9,6 +7,7 @@ public class AddressBook {
    static HashMap<String,Contacts> addressBookMap = new HashMap<>();
     ArrayList<Contacts> list = new ArrayList<Contacts>();
     AddressBookMain addressBookMain = new AddressBookMain();
+        Dictionary dictionary = new Hashtable<String,ArrayList<Contacts>>();
 
     public Contacts addContact() {
 
@@ -37,7 +36,8 @@ public class AddressBook {
         System.out.println(contacts);
         return contacts;
     }
-
+    /* Displaying the contacts and
+    address book*/
     public void displayContact() {
         for (int i = 0; i < list.size(); i++) {
             System.out.println(list.get(i) + "");
@@ -46,7 +46,8 @@ public class AddressBook {
 
 
 
-    }
+    }/* removing the duplicate contacts based on
+    the first name*/
     public void duplicateEntry(){
         boolean flag = false;
         Contacts personDetails = addContact();
@@ -57,6 +58,8 @@ public class AddressBook {
         }
         if (!flag) {
             list.add(personDetails);
+            storePersonByCity(personDetails.getCity(), personDetails);//call store person details by city name
+            storePersonByState(personDetails.getState(), personDetails);//call store person details by state name
 
         } else {
             System.out.println("First Name already exist..");
@@ -100,6 +103,34 @@ public class AddressBook {
         String state = scanner.next();
         list.stream().filter(person -> person.getState().equalsIgnoreCase(state)).forEach(System.out::println);
     }
+    public void storePersonByCity(String cityName, Contacts personObject) {
+        while (dictionary.keys().hasMoreElements()) {
+            if (dictionary.keys().nextElement().equals(cityName)) {
+                ArrayList<Contacts> personDetailsArray = (ArrayList<Contacts>) dictionary.get(cityName);
+                personDetailsArray.add(personObject);
+                dictionary.put(cityName, personDetailsArray);
+                return;
+            } else break;
+        }
+        ArrayList<Contacts> personDetailsArray = new ArrayList<>();
+        personDetailsArray.add(personObject);
+        dictionary.put(cityName, personDetailsArray);
+    }
+    //store persons detail in dict by state name
+    public void storePersonByState(String stateName, Contacts personObject) {
+        while (dictionary.keys().hasMoreElements()) {
+            if (dictionary.keys().nextElement().equals(stateName)) {
+                ArrayList<Contacts> personDetailsArray = (ArrayList<Contacts>) dictionary.get(stateName);
+                personDetailsArray.add(personObject);
+                dictionary.put(stateName, personDetailsArray);
+                return;
+            } else break;
+        }
+        ArrayList<Contacts> personDetailsArray = new ArrayList<>();
+        personDetailsArray.add(personObject);
+        dictionary.put(stateName, personDetailsArray);
+    }
+
         //Deleting the contact based on firstName
         public void deleteContact() {
             System.out.println("Enter the first name");
