@@ -1,40 +1,68 @@
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Scanner;
 
 public class AddressBook {
     Contacts contacts;
     Scanner scanner = new Scanner(System.in);
+    //AddressBook addressBook = new AddressBook();
+   static HashMap<String,Contacts> addressBookMap = new HashMap<>();
     ArrayList<Contacts> list = new ArrayList<Contacts>();
     AddressBookMain addressBookMain = new AddressBookMain();
 
-    public void addContact() {
+    public Contacts addContact() {
+
         // Scanner scanner = new Scanner(System.in);
         contacts = new Contacts();
         System.out.println("Enter the first name");
-        contacts.setFirstName(scanner.nextLine());
+        contacts.setFirstName(scanner.next());
         System.out.println("enter the last name");
-        contacts.setLastName(scanner.nextLine());
+        contacts.setLastName(scanner.next());
         System.out.println("enter the city");
-        contacts.setCity(scanner.nextLine());
+        contacts.setCity(scanner.next());
         System.out.println("enter the state");
-        contacts.setState(scanner.nextLine());
+        contacts.setState(scanner.next());
         System.out.println("enter the zipcode");
-        contacts.setZipCode(scanner.nextLine());
+        contacts.setZipCode(scanner.next());
         System.out.println("eneter the email");
-        contacts.setEmail(scanner.nextLine());
+        contacts.setEmail(scanner.next());
         System.out.println("enter the phone number");
-        contacts.setPhoneNumber(scanner.nextLine());
+        contacts.setPhoneNumber(scanner.next());
         //System.out.println(contacts);
-        list.add(contacts);
+        //list.add(contacts);
+        System.out.println("enter the address book name");
+        String name = scanner.next();
+       // if(addressBookMap.containsKey(name))
+        addressBookMap.put(name,contacts);
         System.out.println(contacts);
+        return contacts;
     }
 
     public void displayContact() {
         for (int i = 0; i < list.size(); i++) {
             System.out.println(list.get(i) + "");
         }
-        System.out.println(AddressBookMain.addressBookMap);
+        System.out.println(addressBookMap);
+
+
+
     }
+    public void duplicateEntry(){
+        boolean flag = false;
+        Contacts personDetails = addContact();
+        for (Contacts objPerson : list) {
+            if (objPerson.getFirstName().equals(personDetails.getFirstName())) {
+                flag = true;
+            }
+        }
+        if (!flag) {
+            list.add(personDetails);
+
+        } else {
+            System.out.println("First Name already exist..");
+        }
+    }
+
 
     //editing contact based on person name
     public void editContact() {
